@@ -39,7 +39,7 @@ app.get('/tables', function (req, res) {
 });
 
 app.get('/tables/:table/info', function (req, res) {
-  tables.getTableInfo(req.params.table).then(function(resp) {
+  tables.getTableInfo(req.params.table, DB_DATABASE).then(function(resp) {
     res.type('application/json');
     res.send(resp);
   });

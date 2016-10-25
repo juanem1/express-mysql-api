@@ -23,8 +23,8 @@ class Tables {
     return this.getQuery(qs);
   }
 
-  getTableInfo(tableName) {
-    let qs = `SELECT * FROM information_schema.TABLES WHERE TABLE_SCHEMA = '${DB_DATABASE}' AND table_name = '${tableName}'`;
+  getTableInfo(tableName, dbName) {
+    let qs = `SELECT * FROM information_schema.TABLES WHERE TABLE_SCHEMA = '${dbName}' AND table_name = '${tableName}'`;
     return this.getQuery(qs);
   }
 
