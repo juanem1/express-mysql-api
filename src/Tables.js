@@ -2,7 +2,11 @@
 
 class Tables {
 
-  constructor(connection) {
+  constructor() {
+    this.connection;
+  }
+
+  setConnection(connection) {
     this.connection = connection;
   }
 
