@@ -3,16 +3,12 @@
 class Tables {
 
   constructor() {
-    this.connection;
-  }
-
-  setConnection(connection) {
-    this.connection = connection;
+    this.DB = require('./DB');
   }
 
   getQuery(qs) {
     return new Promise((resolve, reject) => {
-      this.connection.query(qs, (err, response, fields) => {
+      this.DB.connection.query(qs, (err, response, fields) => {
         if (err) {
           reject(err);
         } else {
@@ -27,7 +23,8 @@ class Tables {
     return this.getQuery(qs);
   }
 
-  getTableInfo(tableName, dbName) {
+  getTableInfo(tableName) {
+    let dbName = this.DB.config.database;
     let qs = `SELECT * FROM information_schema.TABLES WHERE TABLE_SCHEMA = '${dbName}' AND table_name = '${tableName}'`;
     return this.getQuery(qs);
   }

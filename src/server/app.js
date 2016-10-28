@@ -11,7 +11,7 @@
   var DB = require('./DB');
 
   var port = process.env.PORT || 3000;
-  var tables = new Tables;
+  var tables = new Tables();
 
   // for parsing application/json
   app.use(bodyParser.json());
@@ -27,10 +27,9 @@
   });
 
   app.post('/connection', (req, res) => {
-    DB.getConnection(req.body).then((resp) => {
-      tables.setConnection(DB.connection);
+    DB.connect(req.body).then((resp) => {
       res.type('application/json');
-      res.send({ "OK": "ok" });
+      res.send({ 'OK': 'ok' });
     });
   });
 
@@ -42,7 +41,7 @@
   });
 
   app.get('/tables/:table/info', (req, res) => {
-    tables.getTableInfo(req.params.table, DB_DATABASE).then((resp) => {
+    tables.getTableInfo(req.params.table).then((resp) => {
       res.type('application/json');
       res.send(resp);
     });

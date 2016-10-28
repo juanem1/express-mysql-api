@@ -3,17 +3,24 @@
 var mysql = require('mysql');
 
 module.exports = {
+  // keep the stablished conneciton
   connection: null,
-  getConnection: function (configObj) {
+
+  // keep the raw configuration
+  config: {
+    host     : '',
+    user     : '',
+    password : '',
+    database : '',
+    port     : ''
+  },
+  
+  // handle a new connection
+  connect: function (configObj) {
+    // TODO: Make validation
     return new Promise((resolve, reject) => {
-      this.connection = mysql.createConnection({
-        host     : configObj.host,
-        user     : configObj.username,
-        password : configObj.password,
-        database : configObj.database,
-        port     : configObj.port
-      });
-      
+      this.config = Object.assign(this.config, configObj);
+      this.connection = mysql.createConnection(this.config);
       this.connection.connect();
       //connection.end();
       resolve();
