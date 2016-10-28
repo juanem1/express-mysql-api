@@ -8,8 +8,8 @@
   var mustacheExpress = require('mustache-express');
 
   // App modules
-  var Tables = require('./Tables');
-  var DB = require('./DB');
+  var Tables = require('./src/server/Tables');
+  var DB = require('./src/server/DB');
 
   var port = process.env.PORT || 3000;
   var tables = new Tables();
@@ -19,8 +19,8 @@
   // for parsing application/x-www-form-urlencoded
   //app.use(bodyParser.urlencoded({ extended: true }));
 
-  app.use(express.static(__dirname, '../../public'));
-
+  app.use(express.static(__dirname + '/public'));
+  
   app.engine('html', mustacheExpress());
   app.set('views', __dirname + '/views');
   app.set('view engine', 'html');

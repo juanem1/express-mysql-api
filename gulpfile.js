@@ -11,7 +11,7 @@ const Task = Elixir.Task;
 Elixir.extend('nodemon', () => {
   new Task('nodemon', () => {
     nodemon({
-      script: './src/server/app.js',
+      script: './server.js',
       ext: 'js',
       env: {
       PORT: 8080
@@ -27,13 +27,13 @@ Elixir.extend('inject', () => {
     let target = gulp.src('./src/client/index.html');
     // It's not necessary to read the files (will speed up things), we're only after their paths: 
     let sources = gulp.src([
-      './dist/css/**/*.css', 
-      './dist/js/**/*.js'
+      './public/css/**/*.css', 
+      './public/js/**/*.js'
     ], {read: false});
  
     return target
       .pipe(inject(sources))
-      .pipe(gulp.dest('./dist'));
+      .pipe(gulp.dest('./public'));
   });
 });
 
@@ -51,20 +51,20 @@ Elixir((mix) => {
   // Mix Vendor styles
   mix.styles([
     './node_modules/bulma/css/bulma.css'
-  ], 'dist/css/vendor.css');
+  ], 'public/css/vendor.css');
 
   // Mix App styles
   mix.sass([
     './src/client/assets/sass/main.scss'
-  ], 'dist/css/app.css');
+  ], 'public/css/app.css');
 
   // Mix app scripts
   mix.scripts([
     './src/client/assets/js/app.js'
-  ], 'dist/js/app.js');
+  ], 'public/js/app.js');
 
   // Before inject files clean index.html
-  //mix.clean('dist/index.html');
+  //mix.clean('public/index.html');
 
   // Inject css and js files into HTML
   mix.inject();
