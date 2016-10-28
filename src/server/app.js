@@ -20,14 +20,14 @@
 
   app.engine('html', mustacheExpress());
   app.set('view engine', 'html');
-  app.set('views', __dirname + '/views'); // you can change '/views' to '/public',
+  app.set('views', './');
 
   app.get('/', (req, res) => {
-    res.render('index');
+    res.render('../index');
   });
 
   app.post('/connection', (req, res) => {
-    DB.connect(req.body).then((resp) => {
+    DB.connect(req.body).then(() => {
       res.type('application/json');
       res.send({ 'OK': 'ok' });
     });
